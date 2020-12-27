@@ -1,6 +1,7 @@
 package com.david.springboot.controller;
 
 import com.david.springboot.bean.User;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -9,6 +10,8 @@ import java.util.*;
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
+    @Value("${com.david.name}")
+    private String name;
 
     /**
      * 创建线程安全的Map,存放用户数据
@@ -30,4 +33,5 @@ public class UserController {
     public User getUser(@PathVariable Long id){
         return users.get(id);
     }
+
 }
