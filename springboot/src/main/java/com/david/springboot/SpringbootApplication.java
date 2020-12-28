@@ -1,9 +1,14 @@
 package com.david.springboot;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
-@SpringBootApplication
+
+// 此注解表示动态扫描DAO接口所在包
+@MapperScan("com.david.springboot.dao")
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 public class SpringbootApplication {
 
     public static void main(String[] args) {

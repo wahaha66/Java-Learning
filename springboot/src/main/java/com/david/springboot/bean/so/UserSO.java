@@ -1,14 +1,15 @@
-package com.david.springboot.bean;
+package com.david.springboot.bean.so;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class User {
-
+@ToString
+public class UserSO {
     @NotNull(message = "id不能为空")
     private Long id;
 
