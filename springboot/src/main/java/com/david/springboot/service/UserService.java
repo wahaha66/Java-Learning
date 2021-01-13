@@ -1,7 +1,7 @@
 package com.david.springboot.service;
 
 import com.david.springboot.bean.model.User;
-import com.david.springboot.dao.UserDao;
+import com.david.springboot.dao.p.UserMapperPrimary;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -11,7 +11,7 @@ import java.util.List;
 public class UserService {
 
     @Resource
-    private UserDao userDao;
+    private UserMapperPrimary userDao;
 
     public User selectUserByName(String name) {
         return userDao.findUserByName(name);

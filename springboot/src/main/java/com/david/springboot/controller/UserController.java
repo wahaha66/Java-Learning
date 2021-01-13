@@ -4,6 +4,7 @@ import com.david.framework.bean.RespState;
 import com.david.springboot.bean.model.User;
 import com.david.springboot.bean.so.UserSO;
 import com.david.springboot.bean.vo.UserVO;
+import com.david.springboot.service.UserPrimaryService;
 import com.david.springboot.service.UserService;
 import com.google.common.collect.Lists;
 import org.springframework.beans.BeanUtils;
@@ -21,7 +22,8 @@ public class UserController {
     private String name;
     @Resource
     private UserService userService;
-
+    @Resource
+    private UserPrimaryService primaryService;
 
     @GetMapping(value = "/")
     public List<UserVO> getUserList() {
@@ -59,4 +61,19 @@ public class UserController {
         return new RespState(true);
     }
 
+    @GetMapping("/user/p/{name}")
+    public UserVO getUserByNameOfPrimary(@PathVariable String name) {
+        UserVO userVO = new UserVO();
+        User user = primaryService.getUserByPrimary(name);
+        BeanUtils.copyProperties(user, userVO);
+        return userVO;
+    }
+
+    @GetMapping("/user/s/{name}")
+    public UserVO getUserByNameOfSecondary(@PathVariable String name) {
+        UserVO userVO = new UserVO();
+        User user = primaryService.getUserBySecondary(name);
+        BeanUtils.copyProperties(user, userVO);
+        return userVO;
+    }
 }

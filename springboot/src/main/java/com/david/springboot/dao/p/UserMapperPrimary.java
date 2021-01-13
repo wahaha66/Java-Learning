@@ -1,14 +1,11 @@
-package com.david.springboot.dao;
+package com.david.springboot.dao.p;
 
 import com.david.springboot.bean.model.User;
 import org.apache.ibatis.annotations.*;
-import org.mapstruct.Mapper;
 
 import java.util.List;
 
-@Mapper
-public interface UserDao {
-
+public interface UserMapperPrimary {
     @Select("SELECT * FROM user WHERE name = #{name}")
     User findUserByName(@Param("name") String name);
 
@@ -23,4 +20,13 @@ public interface UserDao {
 
     @Delete("DELETE FROM user WHERE id = #{id}")
     void deleteUser(@Param("id") Long id);
+
+    @Select("SELECT * FROM USER WHERE NAME = #{name}")
+    User findByName(@Param("name") String name);
+
+    @Insert("INSERT INTO USER(NAME, AGE) VALUES(#{name}, #{age})")
+    int insert(@Param("name") String name, @Param("age") Integer age);
+
+    @Delete("DELETE FROM USER")
+    int deleteAll();
 }
