@@ -1,4 +1,4 @@
-package com.david.springboot.dao.s;
+package com.david.springboot.dao.mysql.s;
 
 import com.david.springboot.bean.model.User;
 import org.apache.ibatis.annotations.Delete;

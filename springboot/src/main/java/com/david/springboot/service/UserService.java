@@ -1,7 +1,7 @@
 package com.david.springboot.service;
 
 import com.david.springboot.bean.model.User;
-import com.david.springboot.dao.p.UserMapperPrimary;
+import com.david.springboot.dao.mysql.p.UserMapperPrimary;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

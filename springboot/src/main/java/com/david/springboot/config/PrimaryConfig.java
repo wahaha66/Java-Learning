@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan(basePackages = "com.david.springboot.dao.p",
+@MapperScan(basePackages = "com.david.springboot.dao.mysql.p",
         sqlSessionFactoryRef = "sqlSessionFactoryPrimary",
         sqlSessionTemplateRef = "sqlSessionTemplatePrimary")
 public class PrimaryConfig {

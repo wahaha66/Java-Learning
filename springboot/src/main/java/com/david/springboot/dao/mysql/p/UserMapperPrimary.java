@@ -1,10 +1,12 @@
-package com.david.springboot.dao.p;
+package com.david.springboot.dao.mysql.p;
 
 import com.david.springboot.bean.model.User;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface UserMapperPrimary {
     @Select("SELECT * FROM user WHERE name = #{name}")
     User findUserByName(@Param("name") String name);

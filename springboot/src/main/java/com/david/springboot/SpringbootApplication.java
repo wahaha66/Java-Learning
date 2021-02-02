@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 
 // 此注解表示动态扫描DAO接口所在包
-@MapperScan("com.david.springboot.dao")
+@MapperScan("com.david.springboot.dao.mysql")
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 public class SpringbootApplication {
 

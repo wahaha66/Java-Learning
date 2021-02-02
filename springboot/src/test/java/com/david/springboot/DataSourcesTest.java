@@ -1,12 +1,17 @@
 package com.david.springboot;
 
 import com.david.springboot.bean.model.User;
-import com.david.springboot.dao.p.UserMapperPrimary;
+import com.david.springboot.dao.mysql.p.UserMapperPrimary;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = SpringbootApplication.class)
 public class DataSourcesTest {
     @Autowired
     private UserMapperPrimary userMapperPrimary;
