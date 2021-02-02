@@ -3,9 +3,13 @@ package com.david.springboot;
 import com.david.framework.util.JsonUtil;
 import com.david.springboot.bean.model.EsModel;
 import com.david.springboot.dao.es.EsModelRepository;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.Aggregations;
+import org.elasticsearch.search.aggregations.bucket.nested.NestedAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.terms.StringTerms;
 import org.elasticsearch.search.aggregations.metrics.avg.InternalAvg;
 import org.elasticsearch.search.sort.SortBuilders;
@@ -140,5 +144,23 @@ public class EsIndexTest {
             InternalAvg avg = (InternalAvg) bucket.getAggregations().asMap().get("priceAvg");
             System.out.println("平均售价：" + avg.getValue());
         });
+    }
+
+    @Test
+    public void testSubAgg(){
+        NestedAggregationBuilder nestedAggregationBuilder = AggregationBuilders.nested("nestedByMatchOdds","matchOdds");
+        nestedAggregationBuilder.subAggregation(AggregationBuilders.terms("groupByplayCateId").field("matchOdds.playCateId").size(1000)
+                .subAggregation(AggregationBuilders.reverseNested("findParents")
+                        .subAggregation(AggregationBuilders.sum("sum").field("totalAmount"))
+                )
+        );
+        BoolQueryBuilder bqb = QueryBuilders.boolQuery();
+
+        SearchResponse response = template.getClient().prepareSearch(new String[]{"cx_sport_bet_20210120"})
+                .setQuery(bqb)
+                .addAggregation(nestedAggregationBuilder)
+                .execute().actionGet();
+        Aggregations aggS = response.getAggregations();
+
     }
 }
